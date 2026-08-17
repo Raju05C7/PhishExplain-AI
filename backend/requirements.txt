@@ -5,5 +5,5 @@ pydantic
 scikit-learn
 joblib
 pandas
-mailparser
+mail-parser
 beautifulsoup4
