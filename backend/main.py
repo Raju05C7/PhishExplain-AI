@@ -1,8 +1,8 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from api.email_upload import router as email_upload_router
 
 from api.analyze import router as analyze_router
+from api.email_upload import router as email_upload_router
 
 
 app = FastAPI(
@@ -12,12 +12,16 @@ app = FastAPI(
 )
 
 
-# ==================== CORS ====================
+# ============================================================
+# CORS
+# ============================================================
 
 app.add_middleware(
     CORSMiddleware,
     allow_origins=[
         "http://localhost:5173",
+        "http://127.0.0.1:5173",
+        "https://phishexplain-ai-4.onrender.com",
     ],
     allow_credentials=True,
     allow_methods=["*"],
@@ -25,13 +29,17 @@ app.add_middleware(
 )
 
 
-# ==================== ROUTES ====================
+# ============================================================
+# ROUTERS
+# ============================================================
 
 app.include_router(analyze_router)
 app.include_router(email_upload_router)
 
 
-# ==================== BASIC ROUTES ====================
+# ============================================================
+# ROOT
+# ============================================================
 
 @app.get("/")
 def root():
@@ -41,9 +49,13 @@ def root():
     }
 
 
+# ============================================================
+# HEALTH CHECK
+# ============================================================
+
 @app.get("/api/health")
-def health_check():
+def health():
     return {
         "status": "healthy",
-        "service": "PhishExplain AI Backend",
+        "service": "PhishExplain AI API",
     }
