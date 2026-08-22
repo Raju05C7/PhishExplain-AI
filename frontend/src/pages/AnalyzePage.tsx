@@ -97,14 +97,15 @@ export default function AnalyzePage() {
 
     formData.append("file", file);
 
-
-    const response = await fetch(
-  "https://phishexplain-ai-3.onrender.com/api/parse-eml",
-  {
-    method: "POST",
-    body: formData,
-  },
+        const response = await fetch(
+      "https://phishexplain-ai-3.onrender.com/api/parse-eml",
+      {
+        method: "POST",
+        body: formData,
+      },
     );
+    
+
     if (!response.ok) {
 
       const errorText =
